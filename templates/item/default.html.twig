@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+        <nav class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand" href="/calculator">Factory Town Resource Calculator</a>
+        </nav>
+        {% set level = 0 %}
+        <div class="container py-3">
+            <div id="tree" data-id="{{ id }}"></div>
+        </div>
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}         
+         {% endblock %}
+    </body>
+</html>
