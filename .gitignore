@@ -1,6 +1,5 @@
 
 ###> symfony/framework-bundle ###
-/.env
 /.env.local
 /.env.*.local
 /public/bundles/
@@ -18,3 +17,4 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+.env
