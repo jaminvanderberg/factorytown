@@ -49,6 +49,11 @@ class Item
      */
     private $coin;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $ordering;
+
     public function getId(): ?string
     {
         return $this->id;
@@ -126,6 +131,18 @@ class Item
 
     public function setCoin(?Coin $coin): self {
         $this->coin = $coin;
+        return $this;
+    }
+
+    public function getOrdering(): ?int
+    {
+        return $this->ordering;
+    }
+
+    public function setOrdering(int $ordering): self
+    {
+        $this->ordering = $ordering;
+
         return $this;
     }
 

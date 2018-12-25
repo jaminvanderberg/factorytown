@@ -2,6 +2,9 @@
 <html lang="en">
     <head>
         {% block stylesheets %}
+            <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+            <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
     </head>
@@ -10,28 +13,8 @@
             <a class="navbar-brand" href="/calculator">Factory Town Resource Calculator</a>
         </nav>
         <div class="container">
-            <div>
-                {% set category='' %}
-                {% for item in items %}
-                    {% if category != item.categoryName %}
-                        </div>
-                        <div class="row">
-                            <div class="col 12 text-center"><img src="/image/category/{{ item.categoryImage }}"> {{ item.categoryName }}</div>
-                        </div>
-                        <div class="row">
-                        {% set category = item.categoryName %}
-                    {% endif %}
-                    <div class="col-sm-6 col-lg-4 col-xl-3">
-                        <button type="button" class="btn btn-light text-left w-100">
-                            <span class="h5" href="{{ path('item', { 'id': item.id }) }}" data-id="{{ item.id }}">
-                                <image src="/image/item/{{ item.image }}"><span class="pl-1">{{ item.name }}</span>
-                            </span>
-                            {% if item.coin %}
-                                <div class="float-right h-100 {{ item.coinClass }}"><img class="coin-image" src="/image/coin/{{ item.coinImage }}"><strong>{{ item.sell }}</strong></div>
-                            {% endif %}
-                        </button>
-                    </div>
-                {% endfor %}
+            <div id="ui-base" data-items="{{ flat|json_encode }}">
+
             </div>
         </div>
 

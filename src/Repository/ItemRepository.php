@@ -33,6 +33,15 @@ class ItemRepository extends ServiceEntityRepository
         ;
     }
     
+    /**
+     * @return array Returns an array of arrays
+     */
+    public function getItemsFlat() {
+        return $this->createQuery(
+            "SELECT i.id, i.name, i.image, c.name AS category_name, percent, c.image AS category_image, co.name AS coin_name, co.image AS coin_image"
+            . "FROM Item i Category c Coin co"
+        )->getResult();
+    }
 
     /*
     public function findOneBySomeField($value): ?Item

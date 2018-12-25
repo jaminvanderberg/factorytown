@@ -4,8 +4,9 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
 use App\Entity\Item;
+use App\Entity\Category;
+use App\Entity\Coin;
 
 class CalculatorController extends AbstractController {
     /**
@@ -14,9 +15,15 @@ class CalculatorController extends AbstractController {
     public function calc() {
         //$items = $this->getDoctrine()->getRepository(Item::class)->findAll();
         $items = $this->getDoctrine()->getRepository(Item::class)->getAllByCategory();
+        $flat = $this->getDoctrine()->getEntityManager()->createQuery(
+            "SELECT i.id, i.name, i.image, i.ordering,\n"
+            . "  c.name AS category_name, i.percent, c.image AS category_image, c.ordering AS category_ordering,\n"
+            . "  co.name AS coin_name, co.image AS coin_image, i.sell, co.ordering AS coin_ordering\n"
+            . "FROM App:Item i LEFT JOIN i.category c LEFT JOIN i.coin co"
+        )->getResult();
 
         return $this->render('calculator/default.html.twig', [
-            'items' => $items
+            'items' => $items, 'flat' => $flat
         ]);
     }
 

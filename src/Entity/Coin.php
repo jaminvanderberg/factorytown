@@ -38,7 +38,12 @@ class Coin
     /**
      * @ORM\Column(type="string", length=20)
      */
-    private $class;    
+    private $class;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $ordering;    
 
     public function getId(): ?int
     {
@@ -84,6 +89,18 @@ class Coin
     public function setClass(string $class): self
     {
         $this->class = $class;
+
+        return $this;
+    }
+
+    public function getOrdering(): ?int
+    {
+        return $this->ordering;
+    }
+
+    public function setOrdering(int $ordering): self
+    {
+        $this->ordering = $ordering;
 
         return $this;
     }  
