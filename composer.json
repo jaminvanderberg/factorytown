@@ -7,7 +7,6 @@
         "ext-iconv": "*",
         "sensio/framework-extra-bundle": "^5.2",
         "symfony/console": "4.2.*",
-        "symfony/dotenv": "4.2.*",
         "symfony/flex": "^1.1",
         "symfony/framework-bundle": "4.2.*",
         "symfony/orm-pack": "^1.0",
@@ -61,6 +60,7 @@
         }
     },
     "require-dev": {
+        "symfony/dotenv": "4.2.*",
         "symfony/maker-bundle": "^1.11",
         "symfony/web-server-bundle": "4.2.*"
     }
