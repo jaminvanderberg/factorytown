@@ -2,20 +2,17 @@
 
 namespace App\Entity;
 
-use App\Entity\Item;
 use App\Entity\Recipe;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CoinRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\BuildingRepository")
  */
-class Coin
+class Building
 {
     /**
      * @ORM\Id()
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="string")
      */
     private $id;
 
@@ -30,27 +27,10 @@ class Coin
     private $image;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Item", mappedBy="coin")
-     * @ORM\JoinColumn(name="id", referencedColumnName="coin")
-     */
-    private $items;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Recipe", mappedBy="recipe")
      * @ORM\JoinColumn(name="id", referencedColumnName="recipe")
      */
     private $recipes;
-
-
-    /**
-     * @ORM\Column(type="string", length=20)
-     */
-    private $class;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $ordering;    
 
     public function getId(): ?int
     {
@@ -82,43 +62,11 @@ class Coin
     }
 
     /**
-     * @return Collection|Item[]
-     */
-    public function getItems(): Collection {
-        return $this->items;
-    }
-
-    public function getClass(): ?string
-    {
-        return $this->class;
-    }
-
-    public function setClass(string $class): self
-    {
-        $this->class = $class;
-
-        return $this;
-    }
-
-    public function getOrdering(): ?int
-    {
-        return $this->ordering;
-    }
-
-    public function setOrdering(int $ordering): self
-    {
-        $this->ordering = $ordering;
-
-        return $this;
-    }  
-
-    /**
      * @return Collection|Recipe[]
      */
     public function getRecipes(): Collection {
         return $this->recipes;
-    }
-
+    }    
 
     /**
      * Set the value of id

@@ -13,9 +13,7 @@
             <a class="navbar-brand" href="/calculator">Factory Town Resource Calculator</a>
         </nav>
         <div class="container">
-            <div id="ui-base" data-items="{{ flat|json_encode }}">
-
-            </div>
+            <div id="ui-base" data-items="{{ items|json_encode }}" data-recipes="{{ recipes|json_encode }}"></div>
         </div>
 
         {% block javascripts %}

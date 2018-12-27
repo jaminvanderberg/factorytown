@@ -1,0 +1,64 @@
+<?php
+
+namespace App\Repository;
+
+use App\Entity\Recipe;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Symfony\Bridge\Doctrine\RegistryInterface;
+
+/**
+ * @method Recipe|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Recipe|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Recipe[]    findAll()
+ * @method Recipe[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ */
+class RecipeRepository extends ServiceEntityRepository
+{
+    public function __construct(RegistryInterface $registry)
+    {
+        parent::__construct($registry, Recipe::class);
+    }
+
+    public function getFlat() {
+        $array = $this->getEntityManager()->createQuery(
+            "SELECT r.id, r.fuel,\n"
+            . "  b.name AS building_name, b.image AS building_image,\n"
+            . "  co.name AS coin_name, co.image AS coin_image, co.ordering AS coin_ordering\n"
+            . "FROM App:Recipe r LEFT JOIN r.building b LEFT JOIN r.coin co"
+        )->getArrayResult();
+        $ret = array();
+        foreach($array as $recipe) {
+            $ret[$recipe['id']] = $recipe;
+        }
+        return $ret;
+    }    
+
+    // /**
+    //  * @return Recipe[] Returns an array of Recipe objects
+    //  */
+    /*
+    public function findByExampleField($value)
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.exampleField = :val')
+            ->setParameter('val', $value)
+            ->orderBy('r.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    */
+
+    /*
+    public function findOneBySomeField($value): ?Recipe
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.exampleField = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+    */
+}
