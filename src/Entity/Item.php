@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Category;
 use App\Entity\Coin;
@@ -53,6 +55,28 @@ class Item
      * @ORM\Column(type="integer")
      */
     private $ordering;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\RecipeOutput", mappedBy="item")
+     */
+    private $recipeOutputs;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\RecipeIngredient", mappedBy="item")
+     */
+    private $recipeIngredients;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Recipe", inversedBy="item", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="recipe", referencedColumnName="id")
+     */
+    private $recipe;
+
+    public function __construct()
+    {
+        $this->recipeOutputs = new ArrayCollection();
+        $this->recipeIngredients = new ArrayCollection();
+    }
 
     public function getId(): ?string
     {
@@ -155,6 +179,80 @@ class Item
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|RecipeOutput[]
+     */
+    public function getRecipeOutputs(): Collection
+    {
+        return $this->recipeOutputs;
+    }
+
+    public function addRecipeOutput(RecipeOutput $recipeOutput): self
+    {
+        if (!$this->recipeOutputs->contains($recipeOutput)) {
+            $this->recipeOutputs[] = $recipeOutput;
+            $recipeOutput->setItem($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecipeOutput(RecipeOutput $recipeOutput): self
+    {
+        if ($this->recipeOutputs->contains($recipeOutput)) {
+            $this->recipeOutputs->removeElement($recipeOutput);
+            // set the owning side to null (unless already changed)
+            if ($recipeOutput->getItem() === $this) {
+                $recipeOutput->setItem(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|RecipeIngredient[]
+     */
+    public function getRecipeIngredients(): Collection
+    {
+        return $this->recipeIngredients;
+    }
+
+    public function addRecipeIngredient(RecipeIngredient $recipeIngredient): self
+    {
+        if (!$this->recipeIngredients->contains($recipeIngredient)) {
+            $this->recipeIngredients[] = $recipeIngredient;
+            $recipeIngredient->setItem($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecipeIngredient(RecipeIngredient $recipeIngredient): self
+    {
+        if ($this->recipeIngredients->contains($recipeIngredient)) {
+            $this->recipeIngredients->removeElement($recipeIngredient);
+            // set the owning side to null (unless already changed)
+            if ($recipeIngredient->getItem() === $this) {
+                $recipeIngredient->setItem(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getRecipe(): ?Recipe
+    {
+        return $this->recipe;
+    }
+
+    public function setRecipe(?Recipe $recipe): self
+    {
+        $this->recipe = $recipe;
 
         return $this;
     }

@@ -37,17 +37,13 @@ class ItemRepository extends ServiceEntityRepository
      * @return array Returns an array of arrays
      */
     public function getFlat() {
-        $array = $this->getEntityManager()->createQuery(
+        return $this->getEntityManager()->createQuery(
             "SELECT i.id, i.name, i.image, i.ordering,\n"
             . "  c.name AS category_name, i.percent, c.image AS category_image, c.ordering AS category_ordering,\n"
-            . "  co.name AS coin_name, co.image AS coin_image, i.sell, co.ordering AS coin_ordering\n"
-            . "FROM App:Item i LEFT JOIN i.category c LEFT JOIN i.coin co"
+            . "  co.name AS coin_name, co.image AS coin_image, i.sell, co.ordering AS coin_ordering,\n"
+            . "  r.id AS recipe\n"
+            . "FROM App:Item i LEFT JOIN i.category c LEFT JOIN i.coin co LEFT JOIN i.recipe r"
         )->getResult();
-        $ret = array();
-        foreach($array as $item) {
-            $ret[$item['id']] = $item;
-        }
-        return $ret;
     }
 
     /*

@@ -2,34 +2,36 @@
 
 namespace App\Repository;
 
-use App\Entity\Recipe;
+use App\Entity\RecipeOutput;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Recipe|null find($id, $lockMode = null, $lockVersion = null)
- * @method Recipe|null findOneBy(array $criteria, array $orderBy = null)
- * @method Recipe[]    findAll()
- * @method Recipe[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method RecipeOutput|null find($id, $lockMode = null, $lockVersion = null)
+ * @method RecipeOutput|null findOneBy(array $criteria, array $orderBy = null)
+ * @method RecipeOutput[]    findAll()
+ * @method RecipeOutput[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class RecipeRepository extends ServiceEntityRepository
+class RecipeOutputRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Recipe::class);
+        parent::__construct($registry, RecipeOutput::class);
     }
 
+   /**
+     * @return array Returns an array of arrays
+     */
     public function getFlat() {
         return $this->getEntityManager()->createQuery(
-            "SELECT r.id, r.fuel, r.time,\n"
-            . "  b.name AS building_name, b.image AS building_image,\n"
-            . "  co.name AS coin_name, co.image AS coin_image, co.ordering AS coin_ordering\n"
-            . "FROM App:Recipe r LEFT JOIN r.building b LEFT JOIN r.coin co"
-        )->getArrayResult();
+            "SELECT r.id AS recipe, i.id AS item, ro.qty,\n"
+            . "  i.name AS item_name, i.image AS item_image\n"
+            . "FROM App:RecipeOutput ro LEFT JOIN ro.recipe r LEFT JOIN ro.item i"
+        )->getResult();
     }    
 
     // /**
-    //  * @return Recipe[] Returns an array of Recipe objects
+    //  * @return RecipeOutput[] Returns an array of RecipeOutput objects
     //  */
     /*
     public function findByExampleField($value)
@@ -46,7 +48,7 @@ class RecipeRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Recipe
+    public function findOneBySomeField($value): ?RecipeOutput
     {
         return $this->createQueryBuilder('r')
             ->andWhere('r.exampleField = :val')

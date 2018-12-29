@@ -64,15 +64,16 @@ class Building
     /**
      * @return Collection|Recipe[]
      */
-    public function getRecipes(): Collection {
+    public function getRecipes(): Collection
+    {
         return $this->recipes;
-    }    
+    }
 
     /**
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setId($id)
     {
         $this->id = $id;

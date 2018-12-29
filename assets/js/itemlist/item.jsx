@@ -1,9 +1,20 @@
 export class Item extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { hover: false }
+    }
+
+    setHover(h) {
+        this.setState({ hover: h });
+    }
+
     render() {
         const item = this.props.item;
 
         return (
-            <div className="w-100">
+            <li key={item.id} className={"list-group-item py-1 px-3 hover-link" + (this.state.hover && " list-group-item-primary")} onClick={this.props.onSelect}
+                onMouseEnter={() => this.setHover(true)} onMouseLeave={() => this.setHover(false)}
+            >
                 <div className="row">
                     <div className="col-6 h6 mb-0" data-id={item.id}>
                         <img src={"/image/item/" + item.image} /> {item.name}
@@ -18,7 +29,7 @@ export class Item extends React.Component {
                         </div>
                     }
                 </div>
-            </div>
+            </li>
         );
     }
 }

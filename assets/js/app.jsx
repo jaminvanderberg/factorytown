@@ -15,6 +15,6 @@ import { UI } from './ui.jsx';
 
 var root = document.getElementById('ui-base');
 ReactDOM.render(
-  <UI items={JSON.parse(root.getAttribute("data-items"))} recipes={JSON.parse(root.getAttribute("data-recipes"))}/>,
-  document.getElementById('ui-base')
+    <UI items={JSON.parse(root.getAttribute("data-items"))} recipes={JSON.parse(root.getAttribute("data-recipes"))} />,
+    document.getElementById('ui-base')
 );

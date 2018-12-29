@@ -1,6 +1,7 @@
 import { Item } from './item.jsx';
 
 export class Category extends React.Component {
+
     render() {
         const category = this.props.category;
 
@@ -11,13 +12,10 @@ export class Category extends React.Component {
                 </h5>
                 <ul className="list-group list-group-flush">
                     {category.children.map((item) =>
-                        <li className="list-group-item py-1 px-3">
-                            <Item key={item.id} item={item} />
-                        </li>
+                        <Item key={item.id} item={item} onSelect={() => this.props.onSelectItem(item.id)}/>
                     )}
                 </ul>
             </div>
         );
     }
 }
-  
