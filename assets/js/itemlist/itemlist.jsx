@@ -31,7 +31,7 @@ export class ItemList extends React.Component {
             return (asc ? a[sortby] - b[sortby] : b[sortby] - a[sortby]);
         });
 
-        var sorticon = <img src={"/image/svg/octicons/" + (this.state.asc ? 'triangle-down.svg' : 'triangle-up.svg')} className="pl-1" />;
+        var sorticon = <img src={"image/svg/octicons/" + (this.state.asc ? 'triangle-down.svg' : 'triangle-up.svg')} className="pl-1" />;
 
         return (
             <div className="card my-2">

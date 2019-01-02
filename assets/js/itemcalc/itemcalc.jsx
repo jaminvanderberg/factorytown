@@ -31,7 +31,7 @@ export class ItemCalc extends React.Component {
                     <li className="list-group-item">
                         <div className="row h4 mb-0">
                             <div className="col-2 form-inline">
-                                <a href="#" onClick={this.props.onBack}><img src="/image/svg/octicons/arrow-left.svg" className="pr-1" />Back</a>
+                                <a href="#" onClick={this.props.onBack}><img src="image/svg/octicons/arrow-left.svg" className="pr-1" />Back</a>
                             </div>
                             <div className="col-10 mb-0 form-inline text-center">
                                 <label htmlFor="mult" className="pr-1 pl-5">Multiplier: </label>

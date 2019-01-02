@@ -11,8 +11,8 @@ export class Recipe extends React.Component {
     }
 
     noImage(e) { 
-        if (e.target.src != "/image/no-image.png") {
-            e.target.src = "/image/no-image.png";
+        if (e.target.src != "image/no-image.png") {
+            e.target.src = "image/no-image.png";
         }
     }
 
@@ -21,9 +21,9 @@ export class Recipe extends React.Component {
         for (var i = 0; i < this.props.indent; i++) {
             indent.push(<span className="pr-4" />);
         }
-        var icon = <img src="/image/svg/octicons/dash.svg" className="pr-1" />;
+        var icon = <img src="image/svg/octicons/dash.svg" className="pr-1" />;
         if (this.props.recipe.children.length) {
-            icon = <img src={"/image/svg/octicons/" + (this.state.open ? "chevron-down.svg" : "chevron-right.svg")} className="pr-1" />;
+            icon = <img src={"image/svg/octicons/" + (this.state.open ? "chevron-down.svg" : "chevron-right.svg")} className="pr-1" />;
         }
 
         return (
@@ -32,7 +32,7 @@ export class Recipe extends React.Component {
                     <div className="col-6 h5">
                         {indent}{icon}
                         <span className="pr-1">{this.props.recipe.qty}x</span>
-                        <img className="icon-image" src={"/image/item/" + this.props.recipe.item.image} 
+                        <img className="icon-image" src={"image/item/" + this.props.recipe.item.image} 
                             alt={this.props.recipe.item.name} title={this.props.recipe.item.name} 
                             onError={this.noImage}
                         />
@@ -41,7 +41,7 @@ export class Recipe extends React.Component {
                     </div>
                     <div className="col-6 h5">
                         <span className="qty pr-1">{Math.round(this.props.recipe.per * 100) / 100.0}x</span>
-                        <img src={"/image/building/" + this.props.recipe.recipe.building_image} className="icon-image" 
+                        <img src={"image/building/" + this.props.recipe.recipe.building_image} className="icon-image" 
                             alt={this.props.recipe.recipe.building_name} title={this.props.recipe.recipe.building_name}
                             onError={this.noImage}
                         />

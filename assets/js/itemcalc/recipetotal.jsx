@@ -1,7 +1,7 @@
 export class RecipeTotal extends React.Component {
     noImage(e) {
-        if (e.target.src != "/image/no-image.png") {
-            e.target.src = "/image/no-image.png";
+        if (e.target.src != "image/no-image.png") {
+            e.target.src = "image/no-image.png";
         }
     }
 
@@ -11,7 +11,7 @@ export class RecipeTotal extends React.Component {
                 <div className="row">
                     <div className="col-6 h6 mb-0">
                         <span className="pr-1 qty">{this.props.total.qty}x</span>
-                        <img src={"/image/item/" + this.props.total.item_image} className="icon-image" 
+                        <img src={"image/item/" + this.props.total.item_image} className="icon-image" 
                             alt={this.props.total.item} title={this.props.total.item}
                             onError={this.noImage}
                         />
@@ -20,7 +20,7 @@ export class RecipeTotal extends React.Component {
                     </div>
                     <div className="col-6 h6 mb-0">
                         <span className="qty pr-1">{Math.round(this.props.total.per * 100) / 100.0}x</span>
-                        <img src={"/image/building/" + this.props.total.building_image} className="icon-image"
+                        <img src={"image/building/" + this.props.total.building_image} className="icon-image"
                             alt={this.props.total.building} title={this.props.total.building}
                             onError={this.noImage}
                         />

@@ -21,7 +21,7 @@ export class ItemTree extends React.Component {
             <li className="list-group-item" onClick={this.toggleOpen}>
                 <div className="h4">
                     <span className="pr-1">
-                        <img src={"/image/svg/octicons/" + (this.props.open ? "diff-removed.svg" : "diff-added.svg")} />
+                        <img src={"image/svg/octicons/" + (this.props.open ? "diff-removed.svg" : "diff-added.svg")} />
                     </span>
                     Complexity: {this.props.tree.complexity}, Base Items: {(Object.keys(this.props.tree.base).sort()).map((b) => this.props.tree.base[b].name).join(', ')}
                 </div>
