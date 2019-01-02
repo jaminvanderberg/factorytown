@@ -1,5 +1,9 @@
 export class RecipeTotal extends React.Component {
-    noImage(e) { e.target.src = "/image/no-image.png"; }
+    noImage(e) {
+        if (e.target.src != "/image/no-image.png") {
+            e.target.src = "/image/no-image.png";
+        }
+    }
 
     render() {
         return (

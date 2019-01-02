@@ -8,8 +8,12 @@ export class Item extends React.Component {
         this.setState({ hover: h });
     }
 
-    noImage(e) { e.target.src = "/image/no-image.png"; }    
-
+    noImage(e) {
+        if (e.target.src != "/image/no-image.png") {
+            e.target.src = "/image/no-image.png";
+        }
+    }
+    
     render() {
         const item = this.props.item;
 

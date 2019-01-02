@@ -10,7 +10,11 @@ export class Recipe extends React.Component {
         this.setState({ open: !this.state.open });
     }
 
-    noImage(e) { e.target.src = "/image/no-image.png"; }
+    noImage(e) { 
+        if (e.target.src != "/image/no-image.png") {
+            e.target.src = "/image/no-image.png";
+        }
+    }
 
     render() {
         var indent = [];
