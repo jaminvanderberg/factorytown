@@ -53,11 +53,6 @@ class Recipe
      */
     private $recipeIngredients;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Item", mappedBy="recipe", cascade={"persist", "remove"})
-     */
-    private $item;
-
     public function __construct()
     {
         $this->recipeOutputs = new ArrayCollection();

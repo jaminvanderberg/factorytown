@@ -12,9 +12,10 @@
         <nav class="navbar navbar-dark bg-dark">
             <a class="navbar-brand" href="/calculator">Factory Town Resource Calculator</a>
         </nav>
-        <div class="container">
+        <div class="container-resp">
             <div id="ui-base" 
                 data-items="{{ items|json_encode }}"
+                data-recipes="{{ recipes|json_encode }}"
             ></div>
         </div>
 

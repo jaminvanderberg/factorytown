@@ -21,7 +21,7 @@ class RecipeRepository extends ServiceEntityRepository
 
     public function getFlat() {
         return $this->getEntityManager()->createQuery(
-            "SELECT r.id, r.fuel, r.time,\n"
+            "SELECT r.id, r.fuel, r.time, b.complexity,\n"
             . "  b.name AS building_name, b.image AS building_image,\n"
             . "  co.name AS coin_name, co.image AS coin_image, co.ordering AS coin_ordering\n"
             . "FROM App:Recipe r LEFT JOIN r.building b LEFT JOIN r.coin co"

@@ -8,6 +8,8 @@ export class Item extends React.Component {
         this.setState({ hover: h });
     }
 
+    noImage(e) { e.target.src = "/image/no-image.png"; }    
+
     render() {
         const item = this.props.item;
 
@@ -16,18 +18,28 @@ export class Item extends React.Component {
                 onMouseEnter={() => this.setHover(true)} onMouseLeave={() => this.setHover(false)}
             >
                 <div className="row">
-                    <div className="col-6 h6 mb-0" data-id={item.id}>
-                        <img src={"/image/item/" + item.image} /> {item.name}
+                    <div className="col-4 h6 mb-0" data-id={item.id}>
+                        <img className="icon-image" src={"/image/item/" + item.image} onError={this.noImage} alt={item.name} title={item.name} />
+                        <span className="pl-1">{item.name}</span>
                     </div>
-                    <div className="col-3 h6 mb-0 text-center">
-                        <img src={"/image/category/" + item.category_image} alt={item.category_name} /> {item.percent ? item.percent + "%" : ""}
+                    <div className="col-2 h6 mb-0 text-center">
+                        {item.category_image ? <img src={"/image/category/" + item.category_image} alt={item.category_name} title={item.category_name}/> : item.category_name}
+                        {item.percent ? item.percent + "%" : ""}
                     </div>
-                    {item.coin_name && 
-                        <div className={"col-3 h6 mb-0 text-right " + item.coin_class}>
-                            <img className="coin-image" src={"/image/coin/" + item.coin_image} />
-                            <strong>{item.sell}</strong>
-                        </div>
-                    }
+                    <div className={"col-2 h6 mb-0 text-right " + item.coin_class}>
+                        {item.coin_name && 
+                            <span>
+                                <img className="coin-image" src={"/image/coin/" + item.coin_image} alt={item.coin_name} title={item.coin_name} />
+                                <strong>{item.sell}</strong>
+                            </span>
+                        }
+                    </div>
+                    <div className="col-2 h6 mb-0 text-right">
+                        <img className="icon-image" src="/image/blank.png" />{item.complexity}
+                    </div>
+                    <div className="col-2 h6 mb-0 text-right">
+                        <img className="icon-image" src="/image/blank.png" />{Math.round(item.sellcomp * 100) / 100.0}
+                    </div>
                 </div>
             </li>
         );

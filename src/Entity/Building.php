@@ -32,6 +32,11 @@ class Building
      */
     private $recipes;
 
+    /**
+     * @ORM\Column(type="decimal", precision=8, scale=2)
+     */
+    private $complexity;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -77,6 +82,18 @@ class Building
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    public function getComplexity()
+    {
+        return $this->complexity;
+    }
+
+    public function setComplexity($complexity): self
+    {
+        $this->complexity = $complexity;
 
         return $this;
     }

@@ -36,14 +36,9 @@ class CalculatorController extends AbstractController {
         foreach($output as $out) {
             $recipedata[$out['recipe']]['output'][] = $out;
         }
-        foreach($itemdata as $k => $item) {
-            if (isset($recipedata[$item['recipe']])) {
-                $itemdata[$k]['recipe'] = $recipedata[$item['recipe']];
-            }
-        }
 
         return $this->render('calculator/default.html.twig', [
-            'items' => $itemdata
+            'items' => $itemdata, 'recipes' => $recipedata
         ]);
     }
 

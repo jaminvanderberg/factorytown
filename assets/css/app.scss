@@ -1,6 +1,4 @@
 @import "~bootstrap/scss/bootstrap";
-@import "~gijgo/css/gijgo.css";
-
 
 .coin-image {
     vertical-align: middle;
@@ -20,4 +18,28 @@
 
 .hover-link {
     cursor: pointer;
+}
+
+.icon-image {
+    height: 36px;
+    width: 36px;
+}
+
+.qty {
+    min-width: 3em;
+    display: inline-block;
+    text-align: right;
+}
+
+@include media-breakpoint-down(md) {
+    .container-resp {
+        @include make-container();
+    }
+}
+
+@include media-breakpoint-up(lg) {
+    .container-resp {
+        @include make-container();
+        @include make-container-max-widths();
+    }
 }

@@ -12,9 +12,20 @@ require('bootstrap');
 //require('./ui.jsx');
 
 import { UI } from './ui.jsx';
+import { Calc } from './calc.jsx';
 
 var root = document.getElementById('ui-base');
+var items = JSON.parse(root.getAttribute("data-items"));
+var recipes = JSON.parse(root.getAttribute("data-recipes"));
+for (var i in items) {
+    var calc = Calc.sorted(items, recipes, i, 1);
+    if (calc.length != 0) {
+        items[i].complexity = calc[0].complexity;
+        items[i].sellcomp = (items[i].sell ? items[i].complexity / items[i].sell : "");
+    }
+}
+
 ReactDOM.render(
-    <UI items={JSON.parse(root.getAttribute("data-items"))} recipes={JSON.parse(root.getAttribute("data-recipes"))} />,
+    <UI items={items} recipes={recipes} />,
     document.getElementById('ui-base')
 );

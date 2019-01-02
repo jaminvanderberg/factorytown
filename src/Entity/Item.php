@@ -66,12 +66,6 @@ class Item
      */
     private $recipeIngredients;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Recipe", inversedBy="item", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="recipe", referencedColumnName="id")
-     */
-    private $recipe;
-
     public function __construct()
     {
         $this->recipeOutputs = new ArrayCollection();
@@ -253,6 +247,18 @@ class Item
     public function setRecipe(?Recipe $recipe): self
     {
         $this->recipe = $recipe;
+
+        return $this;
+    }
+
+    public function getSimple()
+    {
+        return $this->simple;
+    }
+
+    public function setSimple($simple): self
+    {
+        $this->simple = $simple;
 
         return $this;
     }

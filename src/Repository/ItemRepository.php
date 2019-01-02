@@ -38,11 +38,10 @@ class ItemRepository extends ServiceEntityRepository
      */
     public function getFlat() {
         return $this->getEntityManager()->createQuery(
-            "SELECT i.id, i.name, i.image, i.ordering,\n"
-            . "  c.name AS category_name, i.percent, c.image AS category_image, c.ordering AS category_ordering,\n"
-            . "  co.name AS coin_name, co.image AS coin_image, i.sell, co.ordering AS coin_ordering,\n"
-            . "  r.id AS recipe\n"
-            . "FROM App:Item i LEFT JOIN i.category c LEFT JOIN i.coin co LEFT JOIN i.recipe r"
+            "SELECT i.id, i.name, i.image, i.ordering\n"
+            . "  , c.name AS category_name, i.percent, c.image AS category_image, c.ordering AS category_ordering\n"
+            . "  , co.name AS coin_name, co.image AS coin_image, i.sell, co.ordering AS coin_ordering, co.class AS coin_class\n"
+            . "FROM App:Item i LEFT JOIN i.category c LEFT JOIN i.coin co"
         )->getResult();
     }
 
