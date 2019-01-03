@@ -66,6 +66,11 @@ class Item
      */
     private $recipeIngredients;
 
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $renewable;
+
     public function __construct()
     {
         $this->recipeOutputs = new ArrayCollection();
@@ -259,6 +264,18 @@ class Item
     public function setSimple($simple): self
     {
         $this->simple = $simple;
+
+        return $this;
+    }
+
+    public function getRenewable(): ?int
+    {
+        return $this->renewable;
+    }
+
+    public function setRenewable(int $renewable): self
+    {
+        $this->renewable = $renewable;
 
         return $this;
     }

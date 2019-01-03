@@ -1,4 +1,9 @@
 @import "~bootstrap/scss/bootstrap";
+@import "switch.scss";
+
+body {
+    padding: 0 !important;
+}
 
 .coin-image {
     vertical-align: middle;
@@ -24,6 +29,10 @@
     height: 36px;
     width: 36px;
 }
+.icon-blank {
+    height: 36px;
+    width: 1px;
+}
 
 .qty {
     min-width: 3em;
@@ -42,4 +51,12 @@
         @include make-container();
         @include make-container-max-widths();
     }
+}
+
+.no-dec {
+    text-decoration: none !important;
+}
+
+.svg-white {
+    fill: $white;
 }

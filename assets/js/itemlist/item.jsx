@@ -39,10 +39,10 @@ export class Item extends React.Component {
                         }
                     </div>
                     <div className="col-2 h6 mb-0 text-right">
-                        <img className="icon-image" src="image/blank.png" />{item.complexity}
+                        <img className="icon-blank" src="image/blank.png" />{item.complexity}
                     </div>
                     <div className="col-2 h6 mb-0 text-right">
-                        <img className="icon-image" src="image/blank.png" />{Math.round(item.sellcomp * 100) / 100.0}
+                        <img className="icon-blank" src="image/blank.png" />{Math.round(item.sellcomp * 100) / 100.0}
                     </div>
                 </div>
             </li>

@@ -22,6 +22,10 @@ for (var i in items) {
     if (calc.length != 0) {
         items[i].complexity = calc[0].complexity;
         items[i].sellcomp = (items[i].sell ? items[i].complexity / items[i].sell : "");
+        items[i].renewable = false;
+        for (var c in calc) {
+            if (calc[c].renewable) { items[i].renewable = true; break; }
+        }
     }
 }
 

@@ -6,7 +6,7 @@
         {
             "label": "server:run",
             "type": "shell",
-            "command": "php bin/console server:run",
+            "command": "php bin/console server:run --docroot=docs",
             "problemMatcher": [],
             "group" : "build"
         },

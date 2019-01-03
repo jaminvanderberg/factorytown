@@ -56,8 +56,10 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "4.2.*"
+            "require": "4.2.*",
+            "public-dir": "docs"
         },
+        "symfony-public-dir": "docs",
         "public-dir": "docs"
     },
     "require-dev": {
