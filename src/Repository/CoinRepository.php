@@ -19,6 +19,18 @@ class CoinRepository extends ServiceEntityRepository
         parent::__construct($registry, Coin::class);
     }
 
+    /**
+     * @return array Returns an array of arrays
+     */
+    public function getFlat() {
+        return $this->getEntityManager()->createQuery(
+            "SELECT c.id, c.name, c.image, c.class, c.ordering\n"
+            . "FROM App:Coin c\n"
+            . "ORDER BY c.ordering"
+        )->getResult();
+    }    
+
+
     // /**
     //  * @return Coin[] Returns an array of Coin objects
     //  */

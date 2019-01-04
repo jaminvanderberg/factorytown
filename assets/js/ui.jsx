@@ -14,7 +14,7 @@ export class UI extends React.Component {
 
     render() {
         return this.state.item == ''
-            ? <ItemList items={this.props.items} onSelectItem={this.selectItem} />
+            ? <ItemList items={this.props.items} categories={this.props.categories} coins={this.props.coins} onSelectItem={this.selectItem} />
             : <ItemCalc items={this.props.items} recipes={this.props.recipes} item={this.state.item} onBack={() => this.selectItem('')} />
         ;
     }

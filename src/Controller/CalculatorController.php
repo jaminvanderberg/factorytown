@@ -1,8 +1,10 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Coin;
 use App\Entity\Item;
 use App\Entity\Recipe;
+use App\Entity\Category;
 use App\Entity\RecipeOutput;
 use App\Entity\RecipeIngredient;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,6 +21,8 @@ class CalculatorController extends AbstractController {
         $recipes = $this->getDoctrine()->getRepository(Recipe::class)->getFlat();
         $ingredients = $this->getDoctrine()->getRepository(RecipeIngredient::class)->getFlat();
         $output = $this->getDoctrine()->getRepository(RecipeOutput::class)->getFlat();
+        $category = $this->getDoctrine()->getRepository(Category::class)->getFlat();
+        $coin = $this->getDoctrine()->getRepository(Coin::class)->getFlat();
         
         $itemdata = array();
         foreach($items as $item) {
@@ -38,7 +42,8 @@ class CalculatorController extends AbstractController {
         }
 
         return $this->render('calculator/default.html.twig', [
-            'items' => $itemdata, 'recipes' => $recipedata
+            'items' => $itemdata, 'recipes' => $recipedata,
+            'categories' => $category, 'coins' => $coin
         ]);
     }
 

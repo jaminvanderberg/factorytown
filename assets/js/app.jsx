@@ -28,8 +28,10 @@ for (var i in items) {
         }
     }
 }
+var categories = JSON.parse(root.getAttribute("data-categories"));
+var coins = JSON.parse(root.getAttribute("data-coins"));
 
 ReactDOM.render(
-    <UI items={items} recipes={recipes} />,
+    <UI items={items} recipes={recipes} categories={categories} coins={coins} />,
     document.getElementById('ui-base')
 );
