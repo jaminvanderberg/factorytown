@@ -39,7 +39,7 @@ export class ItemCalc extends React.Component {
                             </div>
                         </div>
                     </li>
-                    {tree.map((subtree, index) => <ItemTree key={index} tree={subtree} index={index} open={this.state.open == index} setOpen={this.setOpen}/>)}
+                    {tree.map((subtree, index) => <ItemTree key={index} tree={subtree} items={this.props.items} index={index} open={this.state.open == index} setOpen={this.setOpen}/>)}
                 </ul>
             </div>
         );

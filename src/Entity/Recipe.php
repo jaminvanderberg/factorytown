@@ -53,6 +53,11 @@ class Recipe
      */
     private $recipeIngredients;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $cost;
+
     public function __construct()
     {
         $this->recipeOutputs = new ArrayCollection();
@@ -195,6 +200,18 @@ class Recipe
         if ($newRecipe !== $item->getRecipe()) {
             $item->setRecipe($newRecipe);
         }
+
+        return $this;
+    }
+
+    public function getCost(): ?int
+    {
+        return $this->cost;
+    }
+
+    public function setCost(int $cost): self
+    {
+        $this->cost = $cost;
 
         return $this;
     }

@@ -1,4 +1,6 @@
 import { Recipe } from './recipe.jsx';
+import { RecipeCost } from './recipecost.jsx';
+import { RecipeExtra } from './recipeextra.jsx';
 import { RecipeTotal } from './recipetotal.jsx';
 
 export class ItemTree extends React.Component {
@@ -18,8 +20,8 @@ export class ItemTree extends React.Component {
 
     render() {
         return (
-            <li className="list-group-item" onClick={this.toggleOpen}>
-                <div className="h4">
+            <li className="list-group-item">
+                <div className="h4" onClick={this.toggleOpen}>
                     <span className="pr-1">
                         <img src={"image/svg/octicons/" + (this.props.open ? "diff-removed.svg" : "diff-added.svg")} />
                     </span>
@@ -27,6 +29,9 @@ export class ItemTree extends React.Component {
                 </div>
                 <span className={this.props.open ? "" : "d-none"}>
                     <div className="list-group-item"><Recipe recipe={this.props.tree} indent={0} /></div>
+
+                    <RecipeExtra extra={this.props.tree.extra} />
+                    <RecipeCost cost={this.props.tree.cost} fuel={this.props.tree.fuel} items={this.props.items} />
 
                     <div className="card m-4">
                         <div className="card-header py-2 px-3 h5 mb-0">

@@ -25,7 +25,7 @@ class RecipeOutputRepository extends ServiceEntityRepository
     public function getFlat() {
         return $this->getEntityManager()->createQuery(
             "SELECT r.id AS recipe, i.id AS item, ro.qty,\n"
-            . "  i.name AS item_name, i.image AS item_image\n"
+            . "  i.name AS item_name, i.image AS item_image, i.fuel\n"
             . "FROM App:RecipeOutput ro LEFT JOIN ro.recipe r LEFT JOIN ro.item i"
         )->getResult();
     }    

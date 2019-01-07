@@ -12,7 +12,7 @@ export class ItemList extends React.Component {
         this.setSort = this.setSort.bind(this);
 
         this.state = { 
-            simple: true,
+            simple: false,
             renewable: false,
             category: null,
             coin: null,

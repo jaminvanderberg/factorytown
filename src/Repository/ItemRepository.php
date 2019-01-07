@@ -38,7 +38,7 @@ class ItemRepository extends ServiceEntityRepository
      */
     public function getFlat() {
         return $this->getEntityManager()->createQuery(
-            "SELECT i.id, i.name, i.image, i.ordering, i.renewable\n"
+            "SELECT i.id, i.name, i.image, i.ordering, i.renewable, i.fuel\n"
             . "  , c.id AS category_id, c.name AS category_name, i.percent, c.image AS category_image, c.ordering AS category_ordering\n"
             . "  , co.id AS coin_id, co.name AS coin_name, co.image AS coin_image, i.sell, co.ordering AS coin_ordering, co.class AS coin_class\n"
             . "FROM App:Item i LEFT JOIN i.category c LEFT JOIN i.coin co"

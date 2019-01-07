@@ -71,6 +71,11 @@ class Item
      */
     private $renewable;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $fuel;
+
     public function __construct()
     {
         $this->recipeOutputs = new ArrayCollection();
@@ -276,6 +281,18 @@ class Item
     public function setRenewable(int $renewable): self
     {
         $this->renewable = $renewable;
+
+        return $this;
+    }
+
+    public function getFuel(): ?int
+    {
+        return $this->fuel;
+    }
+
+    public function setFuel(int $fuel): self
+    {
+        $this->fuel = $fuel;
 
         return $this;
     }
