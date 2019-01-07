@@ -1,4 +1,5 @@
 import { Item } from './item.jsx';
+import { DropDown } from './dropdown.jsx';
 
 export class ItemList extends React.Component {
     constructor(props) {
@@ -8,18 +9,23 @@ export class ItemList extends React.Component {
         this.toggleRenewable = this.toggleRenewable.bind(this);
         this.setCategory = this.setCategory.bind(this);
         this.setCoin = this.setCoin.bind(this);
+        this.search = this.search.bind(this);
+        this.reset = this.reset.bind(this);
 
         this.setSort = this.setSort.bind(this);
 
-        this.state = { 
+        this.defaultState = {
             simple: false,
             renewable: false,
             category: null,
             coin: null,
-            sortby: 'category_ordering', 
-            secondary: 'percent', 
-            asc: true 
-        }
+            sortby: 'category_ordering',
+            secondary: 'percent',
+            asc: true,
+            search: ''
+        };        
+
+        this.state = this.defaultState;
     }
 
     toggleSimple() {
@@ -42,6 +48,11 @@ export class ItemList extends React.Component {
         if (this.state.sortby == field && this.state.asc == true) { asc = false; }
         this.setState({ sortby: field, asc: asc, secondary: secondary });
     }
+
+    search(e) {
+        this.setState({ search: e.target.value });
+    }
+    reset() { this.setState(this.defaultState); }
 
     render() {
         const items = Object.keys(this.props.items).map(k => this.props.items[k]);
@@ -85,11 +96,19 @@ export class ItemList extends React.Component {
                                 </span>
                             </div>
                             <div className="col-3 h5 mb-0">
-                                {this.renderDropdown(this.props.categories, 'category', this.state.category, "-- Category --", this.setCategory)}
+                                <DropDown list={this.props.categories} folder="category" current={this.state.category} blank="-- Category --" onSelect={this.setCategory} />
                             </div>
                             <div className="col-3 h5 mb-0">
-                                {this.renderDropdown(this.props.coins, 'coin', this.state.coin, "-- Coin --", this.setCoin)}
+                                <DropDown list={this.props.coins} folder="coin" current={this.state.coin} blank="-- Coin --" onSelect={this.setCoin} />
                             </div>                            
+                        </div>
+                        <div className="row px-3 pt-2">
+                            <div className="col-9 h5 mb-0 text-left form-group">
+                                <input type="text" className="form-control" id="search" placeholder="Search" onChange={this.search} value={this.state.search} />
+                            </div>
+                            <div className="col-3 h5 mb-0">
+                                <button type="button" class="btn btn-outline-secondary w-100" onClick={this.reset}>Reset Filters</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -109,40 +128,12 @@ export class ItemList extends React.Component {
                                 && (!this.state.renewable || item.renewable) 
                                 && (this.state.category == null || item.category_id == this.state.category.id)
                                 && (this.state.coin == null || item.coin_id == this.state.coin.id)
-                                && <Item key={item.id} item={item} onSelect={() => this.props.onSelectItem(item.id)} />)
+                                && (this.state.search == '' || item.name.toUpperCase().includes(this.state.search.toUpperCase()))
+                                ? <Item key={item.id} item={item} onSelect={() => this.props.onSelectItem(item.id)} /> : null)
                         )}
                     </ul>
                 </div>  
             </span>
         );          
-    }
-
-    renderDropdown(list, folder, current, blank, callback) {
-        return (
-            <div className="dropdown">
-                <button className="btn btn-secondary dropdown-toggle w-100" type="button" id="category"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                >
-                    {current == null ? <span className="pr-2">{blank}</span> :
-                        <span className="pr-2">
-                            <img className="icon-small" src={"image/" + folder + "/" + current.image} />
-                            <span className="pl-1">{current.name}</span>
-                        </span>
-                    }
-                </button>
-                <div className="dropdown-menu" aria-labelledby="category">
-                    <a className="dropdown-item" href="#" onClick={() => callback(null)}>
-                        <img className="icon-small" src={"image/blank.png"} />
-                        <span className="pl-1">-- No Filter --</span>
-                    </a>
-                    {list.map((i) =>
-                        <a className="dropdown-item" key={i.id} href="#" onClick={() => callback(i.id, i.name, i.image)}>
-                            <img className="icon-small" src={"image/" + folder + "/" + i.image} />
-                            <span className="pl-1">{i.name}</span>
-                        </a>
-                    )}
-                </div>
-            </div>
-        );
     }
 }

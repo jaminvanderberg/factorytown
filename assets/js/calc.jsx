@@ -25,7 +25,8 @@ export class Calc {
                 var ct = time / qty;
                 var per = (recipe.time / ct) / roqty;
                 var complex = recipe.complexity * Math.ceil(per);
-                var ob = { item: items[item], qty: qty, per: per, critical_time: ct, recipe: recipe, complexity: complex, roqty: roqty, children: [], base: {}, total: {}, renewable: true, extra: {}, cost: {}, fuel: recipe.fuel};
+                var ob = { item: items[item], qty: qty, per: per, critical_time: ct, recipe: recipe, base_complexity: complex,
+                    roqty: roqty, children: [], base: {}, total: {}, renewable: true, extra: {}, cost: {}, fuel: recipe.fuel};
                 var obs = [ob];
 
                 if (!recipe.ingredients.length) {
@@ -58,7 +59,7 @@ export class Calc {
                         for (var o in obs) {
                             var newob = JSON.parse(JSON.stringify(obs[o]));
                             newob.children.push(calc[c]);
-                            newob.complexity += calc[c].complexity;
+                            newob.base_complexity += calc[c].base_complexity;
                             if (!calc[c].renewable) { newob.renewable = false; }
 
                             newob.fuel += calc[c].fuel;
@@ -98,6 +99,8 @@ export class Calc {
                                     newob.cost[s] = calc[c].cost[s];
                                 }
                             }
+
+                            newob.complexity = newob.base_complexity + newob.fuel * 0.5;
 
                             newobs.push(newob);
                         }
